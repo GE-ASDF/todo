@@ -1,0 +1,17 @@
+info: O usuário de id 1 não foi encontrado
+info: O usuário de id 1 não foi encontrado
+info: Um novo usuário foi registrado no banco de dados.
+info: Um novo usuário foi registrado no banco de dados.
+info: Um novo usuário foi registrado no banco de dados.
+info: Um novo usuário foi registrado no banco de dados.
+info: Um novo usuário foi registrado no banco de dados.
+error: Ocorreu um erro na hora de criar um usuário. Erro:Error: Duplicata du champ 'A20047' pour la clef 'user'
+error: Ocorreu um erro na hora de criar um usuário.Error: Duplicata du champ 'A20047' pour la clef 'user'
+info: Um novo usuário foi registrado no banco de dados.
+info: Um novo usuário foi registrado no banco de dados.
+error: Ocorreu um erro na hora de criar um usuário. Error: Erreur de syntaxe près de 'FROM users WHERE user = 'A20047' LIMIT 1' à la ligne 1
+error: Ocorreu um erro na hora de criar um usuário. Error: Erreur de syntaxe près de 'FROM users WHERE user = 'A20047' LIMIT 1' à la ligne 1
+error: Ocorreu um erro na hora de criar um usuário. Error: data and hash arguments required
+error: Ocorreu um erro na hora de criar um usuário. Error: data and hash arguments required
+error: Ocorreu um erro na hora de criar um usuário. Error: data and hash arguments required
+info: Um novo usuário foi registrado no banco de dados.
