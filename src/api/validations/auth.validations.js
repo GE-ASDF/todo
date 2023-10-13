@@ -1,8 +1,8 @@
 const {check, validationResult} = require("express-validator")
 
 exports.authValidationsRules = [
-    check("Usuario", "O usuário é obrigatório").trim().notEmpty().escape(),
-    check("Senha", "A senha é obrigatória").trim().notEmpty().escape(),
+    check("user", "O usuário é obrigatório").trim().notEmpty().escape(),
+    check("password", "A senha é obrigatória").trim().notEmpty().escape(),
 ]
 
 exports.checkAuthRules = (req, res, next)=>{

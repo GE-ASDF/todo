@@ -2,13 +2,35 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const { invalidData } = require("../src/api/constants/Users");
 const bcrypt = require("bcrypt");
+
 exports.createToken = (user)=>{
     if(!user){
         return invalidData;
     }
-    return jwt.sign({user}, config.APP_SECRET);
+    return jwt.sign({user}, config.APP_SECRET, {expiresIn:"1d"});
 }
 
+exports.verifyToken = (req, res, next)=>{
+    const token = req.header("Authorization");
+
+    if(!token){
+        return res.status(401).json({
+            error: true,
+            message:"Token não fornecido",
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, config.APP_SECRET)
+        req.user = decoded.user;
+        if(decoded.exp < Date.now() / 1000){
+            return res.status(401).json({error:true,message:'Token expirou.'})
+        }
+        next();
+    }catch(err){
+        return res.status(401).json({error:true,message:'Token inválido. Acesso não autorizado'})
+    }
+}
 /**
  * Esta função verifica se a senha fornecida pelo usuário é igual a cadastrada no banco de dados.
  * @param {string} noHash - A senha do usuário não criptografada

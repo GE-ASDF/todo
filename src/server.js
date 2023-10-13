@@ -1,4 +1,4 @@
-const app = require("./app");
+const {app} = require("./app");
 const config = require("../config/config");
 const PublicRoutes = require("../routes/PublicRoutes");
 const PrivateRoutes = require("../routes/PrivateRoutes");
