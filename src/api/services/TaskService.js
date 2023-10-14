@@ -15,7 +15,8 @@ module.exports = {
         return res.json({error: true, message:emptyData})
     },
     async All(req, res){
-        const select = await new Tasks().all();
+        const data = matchedData(req);
+        const select = await new Tasks().all({data:[data.iduser],where:"iduser = ?"});
         if(select.tasks.length > 0){
             return res.json(select.tasks)
         }
