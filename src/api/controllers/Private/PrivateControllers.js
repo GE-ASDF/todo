@@ -15,6 +15,8 @@ exports.PrivateControllers = {
         all:CategoriesService.All,
     },
     tasks:{
-        create:TaskService.Create
+        create:TaskService.Create,
+        all:TaskService.All,
+        today:TaskService.Today
     }
 }

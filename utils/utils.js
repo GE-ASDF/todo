@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const { invalidData } = require("../src/api/constants/Users");
 const bcrypt = require("bcrypt");
+const { isValid, parse } = require('date-fns');
 
 exports.createToken = (user)=>{
     if(!user){
@@ -69,4 +70,16 @@ exports.extractDataFromObject = (dataObject)=>{
     return [...Object.values(dataObject)];
 }
 
+exports.validateDate = (date)=>{
+    if(!date){
+        return false;
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        const parsedDate = parse(date, 'yyyy-MM-dd', new Date());
+    
+        return isValid(parsedDate);
+      }
+    
+      return false;
+}
 

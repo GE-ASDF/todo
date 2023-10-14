@@ -2,8 +2,18 @@ const { matchedData } = require("express-validator");
 const Tasks = require("../models/Tasks.model");
 const { emptyData } = require("../constants/Users");
 const logger = require("../../../config/logger");
+const { extractDataFromObject } = require("../../../utils/utils");
 
 module.exports = {
+    async Today(req, res){
+        const {date} = matchedData(req);
+        const extract = extractDataFromObject(date);
+        const select = await new Tasks().all({data:[date], where: "enddate = ?"});
+        if(select.tasks.length > 0){
+            return res.json(select.tasks)
+        }
+        return res.json({error: true, message:emptyData})
+    },
     async All(req, res){
         const select = await new Tasks().all();
         if(select.tasks.length > 0){
