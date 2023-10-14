@@ -2,6 +2,7 @@
 const UsersSerivce = require("../../services/UsersService");
 const TaskService = require("../../services/TaskService");
 const CategoriesService = require("../../services/CategoriesService");
+const StickyService = require("../../services/StickyService");
 
 exports.PrivateControllers = {
     users:{
@@ -13,6 +14,10 @@ exports.PrivateControllers = {
     },
     categories:{
         all:CategoriesService.All,
+    },
+    sticky:{
+        create:StickyService.Create,
+        all:StickyService.All,
     },
     tasks:{
         create:TaskService.Create,

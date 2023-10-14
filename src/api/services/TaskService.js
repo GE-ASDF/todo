@@ -16,7 +16,7 @@ module.exports = {
     },
     async All(req, res){
         const data = matchedData(req);
-        const select = await new Tasks().all({data:[data.iduser],where:"iduser = ?"});
+        const select = await new Tasks('tasks, categories').all({data:[data.iduser],fields:"categories.title as category_title, tasks.*",where:"iduser = ? AND categories.id = tasks.idcategory"});
         if(select.tasks.length > 0){
             return res.json(select.tasks)
         }
