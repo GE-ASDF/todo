@@ -15,6 +15,10 @@ exports.tasksAllValidations = [
     check('date').custom(validateDate).withMessage("A data informada é inválida")
 ]
 
+exports.tasksUserValidations = [
+    check('iduser').trim().notEmpty().escape().isInt(),
+]
+
 exports.checkRules = (req, res, next)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){

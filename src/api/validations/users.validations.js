@@ -14,6 +14,8 @@ exports.usersCreateValidations = [
 exports.checkRules = (req, res, next)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
+        errors.error = true;
+        errors.type = "fields";
         return res.json(errors);
     }
     next();

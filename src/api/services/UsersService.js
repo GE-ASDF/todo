@@ -1,6 +1,6 @@
 const { matchedData } = require("express-validator");
 const { passwordCreate, dateISOString, extractDataFromObject, passwordVerify } = require("../../../utils/utils");
-const { notFound, emptyData, userAlreadyExistsMessage, errorCreatingUser } = require("../constants/Users");
+const { notFound, emptyData, userAlreadyExistsMessage, errorCreatingUser, successMessage } = require("../constants/Users");
 const Users = require("../models/Users.model");
 const {user} = require("../database/user");
 const logger = require("../../../config/logger");
@@ -26,7 +26,7 @@ module.exports = {
             }
             const {created} = await new Users().setUsers(data).create();
             logger.info("Um novo usuário foi registrado no banco de dados.");
-            return res.json(created);
+            return res.json({error: false, message:successMessage, created});
         }catch(error){
             logger.error(errorCreatingUser +" "+ error);
             return res.status(500).json({error:true, message:errorCreatingUser})
