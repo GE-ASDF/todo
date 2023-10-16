@@ -36,5 +36,17 @@ module.exports = {
             return res.json({error: false, message:'Registro atualizado com successo.', update});
         }
         return res.json({error: true, message:'Registro não foi atualizado.', update});
+    },
+    async Delete(req, res){
+        const data = matchedData(req);
+        const deleted = await http.delete({where:[data.id]});
+
+        if(deleted.affectedRows && deleted.affectedRows > 0){
+            return res.json({error: false, message:'Registro apagado com successo.', deleted});
+        }
+        if(deleted.error){
+            return res.json(deleted);
+        }
+        return res.json({error: true, message:'Registro não foi apagado.', deleted});
     }
 }

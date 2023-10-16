@@ -78,6 +78,20 @@ class Tasks extends Model{
             return doned;
         }
     }
+    async delete({where = []}){
+        if(where.length <= 0){
+            return {error:true, message:"Para atualizar um registro é preciso passar uma cláusula WHERE"}
+        }
+        await this.one({fields:"*", data:where, where:'id = ?'})
+        if(!this.task.length >0){
+            return {error: true, message:"Nenhuma tarefa encontrada."};
+        }
+
+        const sql = `DELETE FROM ${this.table} WHERE id = ?`
+        const con = await super.connection();
+        const [deleted] = await con.query(sql, [this.task[0].id])
+        return deleted;
+    }
 }
 
 module.exports = Tasks;
