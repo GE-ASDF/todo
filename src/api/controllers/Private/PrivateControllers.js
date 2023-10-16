@@ -22,6 +22,7 @@ exports.PrivateControllers = {
     tasks:{
         create:TaskService.Create,
         all:TaskService.All,
-        today:TaskService.Today
+        today:TaskService.Today,
+        done:TaskService.Done
     }
 }

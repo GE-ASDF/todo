@@ -55,9 +55,28 @@ class Tasks extends Model{
         sql += order.trim() != '' ? ` ORDER BY ${order}`:"";
         sql += limit.trim() != '' ? ` LIMIT ${limit}`:"";
         const con = await super.connection();
-        const [category] = await con.query(sql,data);
-        this.category = category;
+        const [task] = await con.query(sql,data);
+        this.task = task;
         return this;
+    }
+    async done({where = []}){
+        if(where.length <= 0){
+            return {error:true, message:"Para atualizar um registro é preciso passar uma cláusula WHERE"}
+        }
+        await this.one({fields:"*", data:where, where:'id = ?'})
+        if(!this.task){
+            return {error: true, message:"Nenhuma tarefa encontrada."};
+        }
+        const con = await super.connection();
+        if(this.task[0].done == 0){
+            const sql = `UPDATE ${this.table} SET done = 1 WHERE id = ?`;
+            const [doned] = await con.query(sql, [this.task[0].id])
+            return doned;
+        }else{
+            const sql = `UPDATE ${this.table} SET done = 0 WHERE id = ?`;
+            const [doned] = await con.query(sql, [this.task[0].id])
+            return doned;
+        }
     }
 }
 

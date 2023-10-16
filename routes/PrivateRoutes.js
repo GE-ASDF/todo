@@ -12,6 +12,7 @@ module.exports = [
     router.get("/tasks/today/:date",tasksCreateValidations.tasksAllValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.today),
     router.get("/tasks/all/:iduser", tasksCreateValidations.tasksUserValidations,tasksCreateValidations.checkRules,PrivateControllers.tasks.all),
     router.post("/tasks/create",tasksCreateValidations.tasksCreateValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.create),
+    router.get("/tasks/done/:id",tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.done),
     router.post("/sticky/create",stickyCreateValidations.stickyCreateValidations,stickyCreateValidations.checkRules, PrivateControllers.sticky.create),
     router.get("/sticky/all/:iduser",stickyCreateValidations.stickyAllValidations,stickyCreateValidations.checkRules, PrivateControllers.sticky.all)
 ]

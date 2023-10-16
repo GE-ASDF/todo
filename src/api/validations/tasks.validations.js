@@ -18,7 +18,9 @@ exports.tasksAllValidations = [
 exports.tasksUserValidations = [
     check('iduser').trim().notEmpty().escape().isInt(),
 ]
-
+exports.tasksDoneValidations = [
+    check('id').trim().notEmpty().escape().isInt(),
+]
 exports.checkRules = (req, res, next)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
