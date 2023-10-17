@@ -12,6 +12,10 @@ exports.stickyAllValidations = [
     check("iduser","O id do usuário é obrigatório").trim().notEmpty().escape().isInt(),
 ]
 
+exports.stickyDeleteVations = [
+    check("id","O id do sticky é obrigatório").trim().notEmpty().escape().isInt(),
+]
+
 exports.checkRules = (req, res, next)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){

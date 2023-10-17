@@ -15,6 +15,7 @@ module.exports = [
     router.get("/tasks/done/:id",tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.done),
     router.get("/tasks/delete/:id",tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.delete),
     router.post("/sticky/create",stickyCreateValidations.stickyCreateValidations,stickyCreateValidations.checkRules, PrivateControllers.sticky.create),
+    router.get("/sticky/delete/:id",stickyCreateValidations.stickyDeleteVations,stickyCreateValidations.checkRules, PrivateControllers.sticky.delete),
     router.get("/sticky/all/:iduser",stickyCreateValidations.stickyAllValidations,stickyCreateValidations.checkRules, PrivateControllers.sticky.all)
 ]
 

@@ -18,6 +18,7 @@ exports.PrivateControllers = {
     sticky:{
         create:StickyService.Create,
         all:StickyService.All,
+        delete:StickyService.Delete
     },
     tasks:{
         create:TaskService.Create,

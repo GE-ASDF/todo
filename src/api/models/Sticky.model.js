@@ -55,9 +55,24 @@ class Sticky extends Model{
         sql += order.trim() != '' ? ` ORDER BY ${order}`:"";
         sql += limit.trim() != '' ? ` LIMIT ${limit}`:"";
         const con = await super.connection();
-        const [category] = await con.query(sql,data);
-        this.category = category;
+        const [sticky] = await con.query(sql,data);
+        this.sticky = sticky;
         return this;
+    }
+    async delete({where = ''}){
+        if(!where.trim()){
+            return {error:true, message:"Não foi possível apagar o registro"}
+        }
+        const sql = `DELETE FROM ${this.table} WHERE ${where}`      
+        const select = `SELECT * FROM ${this.table} WHERE id = ?`  
+        const con = await super.connection();
+        const [sticky] = await con.query(select,[this.#sticky.id]);
+        if(sticky.length > 0){
+            const [deleted] = await con.query(sql, [this.#sticky.id]);
+            this.deleted = deleted;
+            return this;
+        }
+        return {error:true, message:"Não foi possível apagar o registro"}
     }
 }
 
