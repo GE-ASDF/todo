@@ -7,6 +7,8 @@ const http = new Tasks();
 module.exports = {
     async Today(req, res){
         const {date} = matchedData(req);
+        const token = req.header("X-CSRF-Token")
+        console.log(token)
         const extract = extractDataFromObject(date);
         const select = await http.all({data:[date], where: "enddate = ?", order: "enddate DESC"});
         if(select.tasks.length > 0){
