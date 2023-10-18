@@ -2,9 +2,11 @@ const { matchedData } = require("express-validator")
 const Users = require("../models/Users.model");
 const { notFound, invalidUserOrPass } = require("../constants/Users");
 const { passwordVerify, createToken } = require("../../../utils/utils");
+const { csrfProtection } = require("../../app");
 
 exports.AuthService = async (req, res)=>{
     const {user, password} = matchedData(req);
+   
     const http = new Users();
     const data = await http.one({data: [user], where:"user = ?"})    
     if(data.user.length <= 0){

@@ -4,7 +4,6 @@ const PublicRoutes = require("../routes/PublicRoutes");
 const PrivateRoutes = require("../routes/PrivateRoutes");
 const { verifyToken } = require("../utils/utils");
 
-
 app.use("/", ...PublicRoutes);
 app.use("/admin", ...PrivateRoutes);
 

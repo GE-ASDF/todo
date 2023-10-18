@@ -4,11 +4,10 @@ const { emptyData } = require("../constants/Users");
 const logger = require("../../../config/logger");
 const { extractDataFromObject } = require("../../../utils/utils");
 const http = new Tasks();
+
 module.exports = {
     async Today(req, res){
         const {date} = matchedData(req);
-        const token = req.header("X-CSRF-Token")
-        console.log(token)
         const extract = extractDataFromObject(date);
         const select = await http.all({data:[date], where: "enddate = ?", order: "enddate DESC"});
         if(select.tasks.length > 0){
@@ -41,6 +40,7 @@ module.exports = {
     },
     async Delete(req, res){
         const data = matchedData(req);
+
         const deleted = await http.delete({where:[data.id]});
 
         if(deleted.affectedRows && deleted.affectedRows > 0){
