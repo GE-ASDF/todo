@@ -384,6 +384,10 @@ info: O usuário 5 inseriu uma anotação
 info: O usuário undefined apagou uma anotação
 info: O usuário 1 inseriu uma tarefa
 info: O usuário 1 inseriu uma tarefa
+<<<<<<< HEAD
 info: O usuário undefined apagou uma anotação
 info: O usuário 1 inseriu uma anotação
 info: O usuário undefined apagou uma anotação
+=======
+info: O usuário 1 inseriu uma tarefa
+>>>>>>> 9521baaed7d1ee8fb9f58545494ab4205f5a3df7
