@@ -25,11 +25,11 @@ module.exports = {
         const data = matchedData(req);
         const http = new Sticky();
         const deleted = await http.setSticky(data).delete({where:'id = ?'});
-    
+        
         if(deleted.error){
             return res.json(deleted);
         }
-        logger.info(`O usuário ${data.iduser} apagou uma anotação`)
+        logger.info(`O usuário ${req.user.id} apagou uma anotação`)
         deleted.error = false;
         return res.json({error:false, message:deletedSuccessMessage, deleted});
     }

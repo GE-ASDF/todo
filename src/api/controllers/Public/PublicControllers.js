@@ -1,7 +1,9 @@
-const {AuthService} = require("../../services/AuthService");
+const {auth, logout, verifyAuth} = require("../../services/AuthService");
 const {TokenService} = require("../../services/TokenService")
 
 exports.PublicControllers = {
-    auth:AuthService,
+    auth:auth,
+    logout:logout,
+    verify:verifyAuth,
     token:TokenService,
 }
