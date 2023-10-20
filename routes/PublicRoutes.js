@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const {PublicControllers} = require("../src/api/controllers/Public/PublicControllers");
+const { authenticateMiddleware } = require("../src/api/middlewares/authenticate");
 const {authValidationsRules,checkAuthRules} = require("../src/api/validations/auth.validations");
 const { csrfProtection } = require("../src/app");
 
@@ -11,7 +12,7 @@ module.exports = [
     }),
     router.get("/token",verifyToken, PublicControllers.token),
     router.post("/auth", csrfProtection, authValidationsRules, checkAuthRules, PublicControllers.auth),
-    router.get("/auth",PublicControllers.verify),
-    router.get("/logout", PublicControllers.logout)
+    router.get("/auth",authenticateMiddleware,verifyToken,PublicControllers.verify),
+    router.get("/logout", authenticateMiddleware,verifyToken, PublicControllers.logout)
 ]
 

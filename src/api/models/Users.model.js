@@ -13,7 +13,19 @@ class Users extends Model{
         this.#users = users;
         return this;
     }
-    
+    async update({where, data, password = false}){
+        if(!where){
+            return {error:true, message:"Not where passed"}
+        }
+        let sql = `UPDATE ${this.table} SET name = ?, updatedAt = ? WHERE ${where}`
+        if(password){
+            sql = `UPDATE ${this.table} SET name = ?, password = ?, updatedAt = ? WHERE ${where}`
+        }
+        const con = await super.connection();
+        const [updated] = await con.query(sql, data);
+        this.updated = updated;
+        return this;
+    }
     async create(){
         if(!this.#users) return "É preciso inserir um usuário primeiro com os seguintes dados: " + this.#usersKeys.join(", ");
         for(let key in this.#usersKeys){

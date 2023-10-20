@@ -10,6 +10,7 @@ module.exports = [
     router.get("/users/all",authenticateMiddleware,verifyToken, PrivateControllers.users.all),
     router.get("/users/one/:id",authenticateMiddleware,verifyToken, UsersValidations.usersOneValidations, UsersValidations.checkRules,PrivateControllers.users.one),
     router.post("/users/create", csrfProtection, UsersValidations.usersCreateValidations,UsersValidations.checkRules, PrivateControllers.users.create),
+    router.post("/users/update", csrfProtection, authenticateMiddleware, verifyToken,UsersValidations.usersUpdateValidations,UsersValidations.checkRules, PrivateControllers.users.update),
     router.get("/categories/all",authenticateMiddleware,verifyToken, PrivateControllers.categories.all),
     router.get("/tasks/today/:date",authenticateMiddleware,verifyToken, tasksCreateValidations.tasksAllValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.today),
     router.get("/tasks/all/:iduser",authenticateMiddleware,verifyToken, tasksCreateValidations.tasksUserValidations,tasksCreateValidations.checkRules,PrivateControllers.tasks.all),

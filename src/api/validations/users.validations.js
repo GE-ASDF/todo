@@ -11,6 +11,11 @@ exports.usersCreateValidations = [
     check("password","Os critérios para a senha são: ter no mínimo 6 caracteres e possuir pelo menos uma letra.").trim().notEmpty().isLength({min:6}).custom((pass)=> /[a-zA-Z]/.test(pass)).escape(),
 ]
 
+exports.usersUpdateValidations = [
+    check("name","O campo nome não pode estar vazio.").trim().notEmpty().isLength({min:'2'}).withMessage("O campo nome deve ter no mínimo 2 caracteres.").escape(),
+    check("password","Os critérios para a senha são: ter no mínimo 6 caracteres e possuir pelo menos uma letra.").trim().optional(),
+]
+
 exports.checkRules = (req, res, next)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){

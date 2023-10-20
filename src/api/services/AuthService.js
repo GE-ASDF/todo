@@ -17,9 +17,9 @@ module.exports = {
         if(!comparePass){
             return res.json({error:true, message:invalidUserOrPass})
         }
+        req.session.user = data.user[0];
         delete data.user[0].password;
         const token = createToken(data.user[0]);
-        req.session.user = data.user[0];
         return res.json({error:false, token, user: data.user[0], message:"Usuário logado com sucesso."});
 
     },

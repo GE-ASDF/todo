@@ -33,7 +33,37 @@ module.exports = {
         }
     },
     async Update(req, res){
-
+        const data = matchedData(req);
+        const user = req.user;
+        if(data.password){
+            if(data.password.length >= 6){
+                const regex = /[a-zA-Z]/
+                const test = regex.test(data.password);
+                if(test == false){
+                    return res.json({error: true, message:"A senha deve ter no mínimo uma letra."})
+                }
+            }else{
+                return res.json({error: true, message:"A senha deve ter no mínimo 6 caracteres."})
+            }
+            
+        }
+        if(!user.id){
+            return res.json({error: true, message:"Não foi possível atualizar o registro."})
+        }
+        data.id = user.id;
+        data.updatedAt = dateISOString();
+        let updated = '';
+        if(data.password){
+            data.password = await passwordCreate(data.password);
+            updated = await new Users().update({where:'id = ?', password:true, data:[data.name, data.password, data.updatedAt, data.id]})
+        }else{
+            updated = await new Users().update({where:'id = ?', data:[data.name, data.updatedAt, data.id]})
+        }
+        if(updated.updated.affectedRows > 0){
+            req.session.user.name = data.name;
+            return res.json({error: false, message:"O registro foi atualizado com sucesso."})
+        }
+        return res.json({error: true, message:"O registro não foi atualizado."})
     },
     async Delete(req, res){
 
