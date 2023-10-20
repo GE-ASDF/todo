@@ -9,7 +9,6 @@ module.exports = [
     router.get("/csrfToken",csrfProtection, (req, res)=> {
         return res.send({csrfToken:req.csrfToken()});
     }),
-    
     router.get("/token",verifyToken, PublicControllers.token),
     router.post("/auth", csrfProtection, authValidationsRules, checkAuthRules, PublicControllers.auth),
     router.get("/auth",PublicControllers.verify),
