@@ -23,6 +23,14 @@ module.exports = {
         }
         return res.json({error: true, message:emptyData})
     },
+    async ChangePriority(req, res){
+        const data = matchedData(req);
+        const changePriority = await http.changePriority(data.id, data.priority);
+        if(changePriority.changed.affectedRows > 0){
+            return res.json({error:false, message:"Prioridade alterada."})
+        }
+        return res.json({error:true, message:"Prioridade não alterada."})
+    },
     async Create(req, res){
         const data = matchedData(req);
         const insert = await http.setTasks(data).create();

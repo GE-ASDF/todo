@@ -17,6 +17,7 @@ module.exports = [
     router.post("/tasks/create",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksCreateValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.create),
     router.get("/tasks/done/:id",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.done),
     router.get("/tasks/delete/:id",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.delete),
+    router.get("/tasks/changepriority/:id/:priority",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksChangePriorityValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.changePriority),
     router.post("/sticky/create",authenticateMiddleware,verifyToken,stickyCreateValidations.stickyCreateValidations,stickyCreateValidations.checkRules, PrivateControllers.sticky.create),
     router.get("/sticky/delete/:id",authenticateMiddleware,verifyToken,stickyCreateValidations.stickyDeleteVations,stickyCreateValidations.checkRules, PrivateControllers.sticky.delete),
     router.get("/sticky/all/:iduser",authenticateMiddleware,verifyToken,stickyCreateValidations.stickyAllValidations,stickyCreateValidations.checkRules, PrivateControllers.sticky.all)

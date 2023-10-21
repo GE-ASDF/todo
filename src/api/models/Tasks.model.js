@@ -14,7 +14,13 @@ class Tasks extends Model{
         this.#tasks = tasks;
         return this;
     }
-    
+    async changePriority(id, priority){
+        const sql = `UPDATE ${this.table} SET priority = ? WHERE id = ?`;
+        const con = await super.connection();
+        const [changed] = await con.query(sql, [priority, id])
+        this.changed = changed;
+        return this;
+    }
     async create(){
         if(!this.#tasks) return "É preciso inserir um usuário primeiro com os seguintes dados: " + this.#tasksKeys.join(", ");
         for(let key in this.#tasksKeys){

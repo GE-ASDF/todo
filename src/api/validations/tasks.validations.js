@@ -21,6 +21,10 @@ exports.tasksUserValidations = [
 exports.tasksDoneValidations = [
     check('id').trim().notEmpty().escape().isInt(),
 ]
+exports.tasksChangePriorityValidations = [
+    check('id').trim().notEmpty().escape().isInt(),
+    check('priority').trim().notEmpty().escape().isInt(),
+]
 exports.checkRules = (req, res, next)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
