@@ -13,6 +13,7 @@ class Users extends Model{
         this.#users = users;
         return this;
     }
+    
     async update({where, data, password = false}){
         if(!where){
             return {error:true, message:"Not where passed"}

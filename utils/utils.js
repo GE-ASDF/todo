@@ -11,6 +11,18 @@ exports.createToken = (user)=>{
     return jwt.sign({user}, config.APP_SECRET, {expiresIn:"1d"});
 }
 
+exports.validatePasswordLength = (password)=>{
+    if(password.length >= 6){
+        const regex = /[a-zA-Z]/
+        const test = regex.test(password);
+        if(test == false){
+            return {error: true, message:"A senha deve ter no mínimo uma letra."}
+        }
+    }else{
+        return {error: true, message:"A senha deve ter no mínimo 6 caracteres."}
+    }
+}
+
 exports.verifyToken = (req, res, next)=>{
     const token = req.header("Authorization");
 

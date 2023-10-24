@@ -1,5 +1,5 @@
 const { matchedData } = require("express-validator");
-const { passwordCreate, dateISOString, extractDataFromObject, passwordVerify } = require("../../../utils/utils");
+const { passwordCreate, dateISOString, extractDataFromObject, passwordVerify, validatePasswordLength } = require("../../../utils/utils");
 const { notFound, emptyData, userAlreadyExistsMessage, errorCreatingUser, successMessage } = require("../constants/Users");
 const Users = require("../models/Users.model");
 const {user} = require("../database/user");
@@ -36,16 +36,10 @@ module.exports = {
         const data = matchedData(req);
         const user = req.user;
         if(data.password){
-            if(data.password.length >= 6){
-                const regex = /[a-zA-Z]/
-                const test = regex.test(data.password);
-                if(test == false){
-                    return res.json({error: true, message:"A senha deve ter no mínimo uma letra."})
-                }
-            }else{
-                return res.json({error: true, message:"A senha deve ter no mínimo 6 caracteres."})
-            }
-            
+            const validatePassword = validatePasswordLength(data.password);
+            if(validatePassword.error){
+                return res.json(validatePassword);                
+            }            
         }
         if(!user.id){
             return res.json({error: true, message:"Não foi possível atualizar o registro."})
@@ -66,7 +60,7 @@ module.exports = {
         return res.json({error: true, message:"O registro não foi atualizado."})
     },
     async Delete(req, res){
-
+        
     },
     /**
      * Este Service busca todos os usuários
