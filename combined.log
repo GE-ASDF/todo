@@ -441,6 +441,7 @@ info: O usuário 1 inseriu uma tarefa
 info: O usuário 1 inseriu uma tarefa
 info: O usuário 1 inseriu uma tarefa
 info: O usuário 1 inseriu uma tarefa
+<<<<<<< HEAD
 info: O usuário 1 inseriu uma tarefa
 info: O usuário 1 inseriu uma tarefa
 info: O usuário 1 inseriu uma tarefa
@@ -501,3 +502,7 @@ info: O usuário 1 apagou uma anotação
 info: O usuário 1 apagou uma anotação
 info: O usuário 1 apagou uma anotação
 info: O usuário 1 apagou uma anotação
+=======
+info: O usuário 1 inseriu uma anotação
+info: O usuário 1 inseriu uma tarefa
+>>>>>>> 9f945be428ba652332787eba2e08eae7b89a8c31
