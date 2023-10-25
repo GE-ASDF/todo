@@ -9,7 +9,7 @@ exports.stickyCreateValidations = [
 ]
 
 exports.stickyAllValidations = [
-    check("iduser","O id do usuário é obrigatório").trim().notEmpty().escape().isInt(),
+    check("limit").trim().notEmpty().escape().isInt(),
 ]
 
 exports.stickyDeleteVations = [

@@ -7,9 +7,18 @@ const { extractDataFromObject } = require("../../../utils/utils");
 module.exports = {
     async All(req, res){
         const data = matchedData(req);
-        const select = await new Sticky('sticky').all({data:[data.iduser],where:"iduser = ?"});
+        const itemsPerPage = 10;
+        const totalStickies = await new Sticky('sticky').all({data:[req.user.id],where:"iduser = ?"});
+        const maxPages = Math.floor(totalStickies.sticky.length / itemsPerPage);
+        let startIndex = (data.limit - 1) * itemsPerPage;
+        if(startIndex <= 1){
+            startIndex = 0;
+        }
+        const endIndex = startIndex + itemsPerPage
+    
+        const select = await new Sticky('sticky').all({data:[req.user.id],where:"iduser = ?", limit:`0, ${endIndex}`});
         if(select.sticky.length > 0){
-            return res.json(select.sticky)
+            return res.json({sticky: select.sticky, maxPages,totalStickies:totalStickies.sticky.length})
         }
         return res.json({error: true, message:emptyData})
     },
