@@ -77,7 +77,9 @@ exports.dateISOString = ()=>{
     const brazilian = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
     return brazilian;
 }
-
+exports.convertDate = (date)=>{
+    return date.split("/").reverse().join("-");
+}
 exports.extractDataFromObject = (dataObject)=>{
     return [...Object.values(dataObject)];
 }

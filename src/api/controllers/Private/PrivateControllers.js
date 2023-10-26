@@ -3,8 +3,11 @@ const UsersSerivce = require("../../services/UsersService");
 const TaskService = require("../../services/TaskService");
 const CategoriesService = require("../../services/CategoriesService");
 const StickyService = require("../../services/StickyService");
-
+const DashboardService = require("../../services/DashboardService.js")
 exports.PrivateControllers = {
+    dashboard:{
+        dash:DashboardService.Dashboard
+    },
     users:{
         one:UsersSerivce.One,
         all:UsersSerivce.All,

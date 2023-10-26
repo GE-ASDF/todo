@@ -7,6 +7,7 @@ const { verifyToken } = require("../utils/utils");
 const {authenticateMiddleware} = require("../src/api/middlewares/authenticate")
 const {csrfProtection} = require("../src/app");
 module.exports = [
+    router.get("/dashboard", authenticateMiddleware, verifyToken, PrivateControllers.dashboard.dash),
     router.get("/users/all",authenticateMiddleware,verifyToken, PrivateControllers.users.all),
     router.get("/users/one/:id",authenticateMiddleware,verifyToken, UsersValidations.usersOneValidations, UsersValidations.checkRules,PrivateControllers.users.one),
     router.post("/users/create", csrfProtection, UsersValidations.usersCreateValidations,UsersValidations.checkRules, PrivateControllers.users.create),
