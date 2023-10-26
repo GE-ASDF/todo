@@ -20,6 +20,7 @@ module.exports = {
         req.session.user = data.user[0];
         delete data.user[0].password;
         const token = createToken(data.user[0]);
+        data.user[0].token = token;
         return res.json({error:false, token, user: data.user[0], message:"Usuário logado com sucesso."});
 
     },

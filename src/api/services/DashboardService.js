@@ -3,7 +3,7 @@ const Sticky = require("../models/Sticky.model");
 const Tasks = require("../models/Tasks.model");
 module.exports = {
     async Dashboard(req, res){
-        const user = 1;
+        const user = req.user.id;
         const tasks = await new Tasks().all({data:[user], where:"iduser = ?"})
         const stickies = await new Sticky().all({data:[user], where: "iduser = ?"})
         const qtdTasksDoned = tasks.tasks.filter((task)=> task.done > 0).length;

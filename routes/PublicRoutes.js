@@ -13,6 +13,6 @@ module.exports = [
     router.get("/token",verifyToken, PublicControllers.token),
     router.post("/auth", csrfProtection, authValidationsRules, checkAuthRules, PublicControllers.auth),
     router.get("/auth",authenticateMiddleware,verifyToken,PublicControllers.verify),
-    router.get("/logout", authenticateMiddleware,verifyToken, PublicControllers.logout)
+    router.get("/logout", PublicControllers.logout)
 ]
 

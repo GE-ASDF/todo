@@ -17,10 +17,9 @@ module.exports = {
         const endIndex = startIndex + itemsPerPage
     
         const select = await new Sticky('sticky').all({data:[req.user.id],where:"iduser = ?", limit:`0, ${endIndex}`});
-        if(select.sticky.length > 0){
-            return res.json({sticky: select.sticky, maxPages,totalStickies:totalStickies.sticky.length})
-        }
-        return res.json({error: true, message:emptyData})
+        return res.json({sticky: select.sticky, maxPages,totalStickies:totalStickies.sticky.length})
+        
+    
     },
     async Create(req, res){
         const data = matchedData(req);

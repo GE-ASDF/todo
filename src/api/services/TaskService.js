@@ -10,18 +10,13 @@ module.exports = {
         const {date} = matchedData(req);
         const extract = extractDataFromObject(date);
         const select = await http.all({data:[date], where: "enddate = ?", order: "enddate DESC"});
-        if(select.tasks.length > 0){
-            return res.json(select.tasks)
-        }
-        return res.json({error: true, message:emptyData})
+        return res.json(select.tasks)
     },
     async All(req, res){
         const data = matchedData(req);
         const select = await new Tasks('tasks, categories').all({data:[data.iduser],fields:"categories.title as category_title, tasks.*",where:"iduser = ? AND categories.id = tasks.idcategory", order:'enddate DESC'});
-        if(select.tasks.length > 0){
-            return res.json(select.tasks)
-        }
-        return res.json({error: true, message:emptyData})
+        return res.json(select.tasks)
+        
     },
     async ChangePriority(req, res){
         const data = matchedData(req);
