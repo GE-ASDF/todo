@@ -13,8 +13,8 @@ module.exports = {
         return res.json(select.tasks)
     },
     async All(req, res){
-        const data = matchedData(req);
-        const select = await new Tasks('tasks, categories').all({data:[data.iduser],fields:"categories.title as category_title, tasks.*",where:"iduser = ? AND categories.id = tasks.idcategory", order:'enddate DESC'});
+        const user = req.user.id
+        const select = await new Tasks('tasks, categories').all({data:[user],fields:"categories.title as category_title, tasks.*",where:"iduser = ? AND categories.id = tasks.idcategory", order:'enddate DESC'});
         return res.json(select.tasks)
         
     },
