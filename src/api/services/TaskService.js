@@ -18,6 +18,11 @@ module.exports = {
         return res.json(select.tasks)
         
     },
+    async One(req, res){
+        const {id} = matchedData(req);
+        const select = await new Tasks('tasks, categories').one({data:[id], fields:'categories.title as category_title, tasks.*', where:"tasks.id = ? AND categories.id = tasks.idcategory"})        
+        return res.json(select.task);
+    },
     async ChangePriority(req, res){
         const data = matchedData(req);
         const changePriority = await http.changePriority(data.id, data.priority);
