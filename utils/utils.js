@@ -21,6 +21,7 @@ exports.validatePasswordLength = (password)=>{
     }else{
         return {error: true, message:"A senha deve ter no mínimo 6 caracteres."}
     }
+    return {error:false};
 }
 
 exports.verifyToken = (req, res, next)=>{
