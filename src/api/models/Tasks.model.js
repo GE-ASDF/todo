@@ -21,6 +21,20 @@ class Tasks extends Model{
         this.changed = changed;
         return this;
     }
+    async update({data, where}){
+        if(!where) return {error:true, message:'Cláusula where necessária.'}
+        let sql = `UPDATE ${this.table} SET `;
+        sql += this.#tasksKeys.map(key =>{
+            if(key != 'iduser'){
+                return `${key} = ?`
+            }
+        }).filter(key => key != undefined).join(",")
+        sql+= ` WHERE ${where}`
+        const con = await super.connection();
+        const [updated] = await con.query(sql, data);
+        this.updated = updated;        
+        return this;
+    }
     async create(){
         if(!this.#tasks) return "É preciso inserir um usuário primeiro com os seguintes dados: " + this.#tasksKeys.join(", ");
         for(let key in this.#tasksKeys){

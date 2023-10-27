@@ -29,6 +29,7 @@ exports.PrivateControllers = {
         today:TaskService.Today,
         done:TaskService.Done,
         one:TaskService.One,
+        update:TaskService.Update,
         delete:TaskService.Delete,
         changePriority:TaskService.ChangePriority
     }

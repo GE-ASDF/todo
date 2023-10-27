@@ -11,6 +11,15 @@ exports.tasksCreateValidations = [
     check('enddate','A data de fim é obrigatória').trim().escape().notEmpty().custom(validateDate).withMessage("A data informada é inválida."),
 ]
 
+exports.tasksUpdateValidations = [
+    check('id','O id da tarefa é obrigatório').trim().escape().notEmpty().isInt(),
+    check('title','O título é obrigatório e deve ter no máximo 50 caracteres.').trim().escape().notEmpty(),
+    check('description','A descrição é obrigatória e deve ter no máximo 255 caracteres').trim().escape().optional(),
+    check('priority','A prioridade é obrigatória.').trim().escape().notEmpty().isInt(),
+    check('idcategory','A categoria é obrigatória').trim().escape().notEmpty().isInt(),
+    check('enddate','A data de fim é obrigatória').trim().escape().notEmpty().custom(validateDate).withMessage("A data informada é inválida."),
+]
+
 exports.tasksAllValidations = [
     check('date').custom(validateDate).withMessage("A data informada é inválida")
 ]

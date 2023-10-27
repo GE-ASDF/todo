@@ -16,6 +16,7 @@ module.exports = [
     router.get("/tasks/today/:date",authenticateMiddleware,verifyToken, tasksCreateValidations.tasksAllValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.today),
     router.get("/tasks/all",authenticateMiddleware,verifyToken,PrivateControllers.tasks.all),
     router.post("/tasks/create",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksCreateValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.create),
+    router.post("/tasks/update",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksUpdateValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.update),
     router.get("/tasks/done/:id",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.done),
     router.get("/tasks/task/:id",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.one),
     router.get("/tasks/delete/:id",authenticateMiddleware,verifyToken,tasksCreateValidations.tasksDoneValidations,tasksCreateValidations.checkRules ,PrivateControllers.tasks.delete),

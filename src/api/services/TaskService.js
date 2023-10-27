@@ -23,6 +23,14 @@ module.exports = {
         const select = await new Tasks('tasks, categories').one({data:[id], fields:'categories.title as category_title, tasks.*', where:"tasks.id = ? AND categories.id = tasks.idcategory"})        
         return res.json(select.task);
     },
+    async Update(req, res){
+        const data = matchedData(req);
+        const update = await http.update({data:[data.title, data.description, data.priority, data.idcategory, data.enddate, data.id], where:'id = ?'})
+        if(update.updated.affectedRows > 0){
+            return res.json({error:false, message:"Registro atualizado com sucesso."})
+        }
+        return res.json({error:true, message:"Registro não foi atualizado."})
+    },
     async ChangePriority(req, res){
         const data = matchedData(req);
         const changePriority = await http.changePriority(data.id, data.priority);

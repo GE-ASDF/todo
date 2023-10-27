@@ -1,4 +1,4 @@
-const { matchedData } = require("express-validator")
+const { matchedData, cookie } = require("express-validator")
 const Users = require("../models/Users.model");
 const { notFound, invalidUserOrPass } = require("../constants/Users");
 const { passwordVerify, createToken } = require("../../../utils/utils");
@@ -25,8 +25,10 @@ module.exports = {
 
     },
     logout(req, res){
+        const cookies = req.cookies;
         if(req.session.user != undefined){
             req.session.user = undefined;
+            res.clearCookie('LOGIN_USER')
             return res.json({error: false, message:"Session destroyed"})
         }
         return res.json({error:true, message:"Session not destroyed"})
